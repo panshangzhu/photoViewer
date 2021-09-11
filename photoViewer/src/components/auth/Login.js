@@ -6,15 +6,23 @@ import { bindActionCreators } from "redux";
 import { push } from "connected-react-router";
 
 // Internal
-import { updateUserName } from "redux/reducers/authReducer/actions";
-import { dummyUserNames } from "./Constant";
+import {
+  updateUserName,
+  getUserNames,
+} from "redux/reducers/authReducer/actions";
+import { getAuthUserNames } from "redux/reducers/authReducer/Selectors";
 import "./Login.css";
+
+const stateToProps = (state) => ({
+  userNames: getAuthUserNames(state),
+});
 
 const dispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
     {
       push,
       updateUserName,
+      getUserNames,
     },
     dispatch
   ),
@@ -32,13 +40,18 @@ class Login extends Component {
   // set Error Message to display
   setErrorMessage = (errorMessage) => this.setState({ errorMessage });
 
+  componentDidMount() {
+    this.props.actions.getUserNames();
+  }
+
   // process login
   onLogin = () => {
     const { userName } = this.state;
+    const { userNames } = this.props;
 
     if (userName.length === 0) {
       this.setErrorMessage("Please enter user name!");
-    } else if (!dummyUserNames.includes(userName)) {
+    } else if (!userNames.includes(userName)) {
       this.setErrorMessage("User name is not valid!");
     } else {
       // remember userName in redux for future use
@@ -71,4 +84,4 @@ class Login extends Component {
   }
 }
 
-export default connect(null, dispatchToProps)(Login);
+export default connect(stateToProps, dispatchToProps)(Login);
