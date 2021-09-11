@@ -3,6 +3,7 @@ import React, { Component } from "react";
 // External
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { push } from "connected-react-router";
 
 // Internal
 import Overlay from "components/common/overlay/Overlay";
@@ -14,11 +15,13 @@ import {
   getUserAlbums,
   getUserPosts,
 } from "redux/reducers/userProfileReducer/Selectors";
+import { getActiveUserId } from "redux/reducers/authReducer/Selectors";
 import UserProfileView from "./UserProfileView";
 
 const stateToProps = (state) => ({
   userAlbums: getUserAlbums(state),
   userPosts: getUserPosts(state),
+  userId: getActiveUserId(state),
 });
 
 const dispatchToProps = (dispatch) => ({
@@ -26,6 +29,7 @@ const dispatchToProps = (dispatch) => ({
     {
       fetchUserPosts,
       fetchUserAlbums,
+      push,
     },
     dispatch
   ),
@@ -33,19 +37,25 @@ const dispatchToProps = (dispatch) => ({
 
 class UserProfile extends Component {
   state = {
-    openOverLay: true,
+    openOverLay: false,
   };
 
   closeOverLay = () => this.setState({ openOverLay: false });
 
   componentDidMount() {
-    Promise.all([
-      this.props.actions.fetchUserPosts(),
-      this.props.actions.fetchUserAlbums(),
-    ]).then(() => {
-      console.log("here here");
-      this.closeOverLay();
-    });
+    const { actions } = this.props;
+
+    // if user hasn't logged in, return to login page
+    // in the future, we can use browser storage to keep user logged in
+    if (!this.props.userId) {
+      actions.push("/");
+    } else {
+      Promise.all([actions.fetchUserPosts(), actions.fetchUserAlbums()]).then(
+        () => {
+          this.closeOverLay();
+        }
+      );
+    }
   }
 
   render() {

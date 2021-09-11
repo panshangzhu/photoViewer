@@ -1,5 +1,3 @@
-// External
-import { push } from "connected-react-router";
 
 // Internal
 import { getData } from "api/Api";
@@ -24,10 +22,6 @@ const _setAlbums = (albums) => ({
 export const fetchUserPosts = () => (dispatch, getState) => {
   const state = getState();
   const userId = getActiveUserId(state);
-  // if no userId, return to login page
-  if (!userId) {
-    return dispatch(push("/"));
-  }
   return getData("/posts", {
     userId,
   })
