@@ -16,8 +16,8 @@ const _setUsers = (users) => ({
     }
 }) 
 
-// Thunk fetch api the get useful userNames
-export const getUserNames = () => (dispatch, getState) => {
+// Thunk fetch api the get users for authetication
+export const getUsers = () => (dispatch, getState) => {
    return getData("/users")
    .then((users) => {
        dispatch(_setUsers(users))

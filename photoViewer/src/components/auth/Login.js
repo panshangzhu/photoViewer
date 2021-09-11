@@ -8,7 +8,7 @@ import { push } from "connected-react-router";
 // Internal
 import {
   updateUserName,
-  getUserNames,
+  getUsers,
 } from "redux/reducers/authReducer/actions";
 import { getAuthUserNames } from "redux/reducers/authReducer/Selectors";
 import "./Login.css";
@@ -22,7 +22,7 @@ const dispatchToProps = (dispatch) => ({
     {
       push,
       updateUserName,
-      getUserNames,
+      getUsers,
     },
     dispatch
   ),
@@ -40,8 +40,9 @@ class Login extends Component {
   // set Error Message to display
   setErrorMessage = (errorMessage) => this.setState({ errorMessage });
 
+  // fetch users for authentication use
   componentDidMount() {
-    this.props.actions.getUserNames();
+    this.props.actions.getUsers();
   }
 
   // process login

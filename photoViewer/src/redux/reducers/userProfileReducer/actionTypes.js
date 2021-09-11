@@ -1,0 +1,2 @@
+export const SET_USER_POSTS = "GET_USER_POSTS";
+export const SET_USER_ALBUMS = "GET_USER_ALBUMS";

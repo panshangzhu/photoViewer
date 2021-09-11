@@ -14,7 +14,7 @@ export default class Router extends Component {
           <Route exact path="/" render={() => <Login />} />
           <Route
             path="/:userName"
-            render={({ match }) => <UserProfile id={match.params.userName} />}
+            render={() => <UserProfile />}
           />
         </Switch>
       </Suspense>

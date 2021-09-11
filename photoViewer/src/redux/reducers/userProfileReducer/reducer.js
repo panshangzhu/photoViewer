@@ -1,17 +1,24 @@
-import { SET_USERNAME } from "./actionTypes"
+import { SET_USER_ALBUMS, SET_USER_POSTS } from "./actionTypes";
 
 const initialState = {
-    userName: ""
-}
+  posts: [],
+  albums: [],
+};
 
 export const reducer = (state = initialState, action) => {
-    const actionType = action.type;
-    switch(actionType) {
-    case SET_USERNAME:
-      return  {
-        userName: action.payload.userName
-    }
+  const actionType = action.type;
+  switch (actionType) {
+    case SET_USER_POSTS:
+      return {
+        ...state,
+        posts: action.payload.posts,
+      };
+    case SET_USER_ALBUMS:
+      return {
+        ...state,
+        albums: action.payload.albums,
+      };
     default:
-        return state;
-    }
-}
+      return state;
+  }
+};

@@ -1,0 +1,53 @@
+// External
+import { push } from "connected-react-router";
+
+// Internal
+import { getData } from "api/Api";
+import { getActiveUserId } from "redux/reducers/authReducer/Selectors";
+import { SET_USER_POSTS, SET_USER_ALBUMS } from "./actionTypes";
+
+const _setPosts = (posts) => ({
+  type: SET_USER_POSTS,
+  payload: {
+    posts,
+  },
+});
+
+const _setAlbums = (albums) => ({
+  type: SET_USER_ALBUMS,
+  payload: {
+    albums,
+  },
+});
+
+//  thunk: get user posts
+export const fetchUserPosts = () => (dispatch, getState) => {
+  const state = getState();
+  const userId = getActiveUserId(state);
+  // if no userId, return to login page
+  if (!userId) {
+    return dispatch(push("/"));
+  }
+  return getData("/posts", {
+    userId,
+  })
+    .then((posts) => {
+      dispatch(_setPosts(posts));
+      return Promise.resolve();
+    })
+    .catch((err) => window.alert(err));
+};
+
+//  thunk: get user albums
+export const fetchUserAlbums = () => (dispatch, getState) => {
+  const state = getState();
+  const userId = getActiveUserId(state);
+  return getData("/albums", {
+    userId,
+  })
+    .then((albums) => {
+      dispatch(_setAlbums(albums));
+      return Promise.resolve();
+    })
+    .catch((err) => window.alert(err));
+};
