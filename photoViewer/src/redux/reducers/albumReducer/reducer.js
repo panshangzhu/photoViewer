@@ -1,8 +1,7 @@
-import { SET_USERNAME, SET_USERS, RESET_AUTH } from "./actionTypes";
+import { SET_USERNAME, SET_USERS } from "./actionTypes";
 
 const initialState = {
-  // active user userName
-  userName: "",
+  photos: "",
   users: [],
 };
 
@@ -19,9 +18,6 @@ export const reducer = (state = initialState, action) => {
         ...state,
         users: action.payload.users,
       };
-    case RESET_AUTH:
-      return initialState;
-
     default:
       return state;
   }

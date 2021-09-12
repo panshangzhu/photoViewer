@@ -6,12 +6,19 @@ import SingleAlbum from "./SingleAlbum";
 import SingleUserAvatar from "./SingleUserAvatar";
 import "./UserProfile.css";
 
-function UserProfileView({ posts, albums, userActive, otherUsers }) {
+function UserProfileView({
+  posts,
+  albums,
+  userActive,
+  otherUsers,
+  onAlbumClick,
+  onLogout,
+}) {
   return (
     <div className="userProfileContainer">
       <div className="userHeader">
-        <h4>Welcome {userActive?.name}</h4>
-        <button className="logout">log out</button>
+        <h4><span className="welcome">Welcome</span> {userActive?.name}</h4>
+        <button className="logout" onClick={(e) => onLogout(e)}>log out</button>
       </div>
       <div className="userContent">
         <div className="postsContainer">
@@ -25,7 +32,9 @@ function UserProfileView({ posts, albums, userActive, otherUsers }) {
         <div className="albumsContainer">
           <h2 className="contentTitle">Your Albums</h2>
           {albums.length > 0 ? (
-            albums.map((album) => <SingleAlbum album={album} key={album.title} />)
+            albums.map((album) => (
+              <SingleAlbum album={album} key={album.title} onAlbumClick={onAlbumClick} />
+            ))
           ) : (
             <p>Empty</p>
           )}

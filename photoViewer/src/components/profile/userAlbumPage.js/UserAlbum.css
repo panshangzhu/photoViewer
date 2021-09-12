@@ -1,0 +1,45 @@
+.albumPhotoContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 16px;
+}
+.backButton {
+  padding: 16px;
+  cursor: pointer;
+}
+.welcome {
+  color: #c23616;
+}
+.backButton:hover {
+  color: #e84118;
+}
+.photoContainer {
+  width: 300px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px;
+}
+.albumPhoto {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: #353b48;
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+  padding: 8px;
+  border-radius: 10px;
+}
+.photoImg {
+  width: 150px;
+  height: 150px;
+  transition: transform 0.2s;
+}
+
+.albumPhoto:hover {
+  background-color: #dcdde1;
+}

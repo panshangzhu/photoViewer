@@ -11,16 +11,16 @@ import {
   fetchUserAlbums,
   fetchUserPosts,
   resetPostsAlbums,
-} from "redux/reducers/userProfileReducer/actions";
+} from "redux/reducers/UserPostReducer/actions";
 import {
   getUserAlbums,
   getUserPosts,
-} from "redux/reducers/userProfileReducer/Selectors";
+} from "redux/reducers/UserPostReducer/Selectors";
 import {
   getUserDetail,
   getUserNamesAndIds,
 } from "redux/reducers/authReducer/Selectors";
-import UserProfileView from "./UserProfileView";
+import UserPostView from "./UserPostView";
 
 const stateToProps = (state) => ({
   userAlbums: getUserAlbums(state),
@@ -41,7 +41,7 @@ const dispatchToProps = (dispatch) => ({
   ),
 });
 
-class UserProfile extends Component {
+class UserPost extends Component {
   state = {
     openOverLay: false,
   };
@@ -65,22 +65,22 @@ class UserProfile extends Component {
   }
 
   componentWillUnmount() {
-    this.props.actions.resetPostsAlbums();
+    
   }
 
   render() {
     const { userPosts, userAlbums, userActive, otherUsers } = this.props;
     return [
       <Overlay open={this.state.openOverLay} key="overlay" />,
-      <UserProfileView
+      <UserPostView
         posts={userPosts}
         albums={userAlbums}
         userActive={userActive}
         otherUsers={otherUsers}
-        key="userProfileView"
+        key="UserPostView"
       />,
     ];
   }
 }
 
-export default connect(stateToProps, dispatchToProps)(UserProfile);
+export default connect(stateToProps, dispatchToProps)(UserPost);

@@ -1,10 +1,9 @@
+import UserAlbum from "components/profile/userAlbumPage.js/UserAlbum";
 import React, { Component, Suspense, lazy } from "react";
 import { Route, Switch } from "react-router";
 
-const Login = lazy(() =>
-  import("./components/auth/Login")
-);
-const UserProfile = lazy(() => import("./components/profile/UserProfile"))
+const Login = lazy(() => import("./components/auth/Login"));
+const UserProfile = lazy(() => import("./components/profile/UserProfile"));
 
 export default class Router extends Component {
   render() {
@@ -12,9 +11,11 @@ export default class Router extends Component {
       <Suspense fallback={<div />}>
         <Switch>
           <Route exact path="/" render={() => <Login />} />
+          <Route exact path="/:userName" render={() => <UserProfile />} />
           <Route
-            path="/:userName"
-            render={() => <UserProfile />}
+            exact
+            path="/:userName/:albumId([0-9]+)"
+            render={({ match }) => <UserAlbum albumId={match.params.albumId} />}
           />
         </Switch>
       </Suspense>

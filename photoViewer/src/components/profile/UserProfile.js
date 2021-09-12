@@ -12,6 +12,7 @@ import {
   fetchUserPosts,
   resetPostsAlbums,
 } from "redux/reducers/userProfileReducer/actions";
+import { resetAuth } from "redux/reducers/authReducer/actions";
 import {
   getUserAlbums,
   getUserPosts,
@@ -36,6 +37,7 @@ const dispatchToProps = (dispatch) => ({
       fetchUserAlbums,
       push,
       resetPostsAlbums,
+      resetAuth,
     },
     dispatch
   ),
@@ -68,6 +70,18 @@ class UserProfile extends Component {
     this.props.actions.resetPostsAlbums();
   }
 
+  onAlbumClick = (albumId) => {
+    this.props.actions.push(`/${this.props.userActive.username}/${albumId}`);
+  };
+
+  onLogout = (e) => {
+    const { actions } = this.props;
+    e.preventDefault();
+    actions.resetPostsAlbums();
+    actions.resetAuth();
+    actions.push("/");
+  };
+
   render() {
     const { userPosts, userAlbums, userActive, otherUsers } = this.props;
     return [
@@ -77,6 +91,8 @@ class UserProfile extends Component {
         albums={userAlbums}
         userActive={userActive}
         otherUsers={otherUsers}
+        onAlbumClick={this.onAlbumClick}
+        onLogout={this.onLogout}
         key="userProfileView"
       />,
     ];
