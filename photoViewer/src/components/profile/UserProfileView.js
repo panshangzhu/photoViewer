@@ -3,20 +3,21 @@ import React from "react";
 // Internal
 import SinglePost from "./SinglePost";
 import SingleAlbum from "./SingleAlbum";
+import SingleUserAvatar from "./SingleUserAvatar";
 import "./UserProfile.css";
 
-function UserProfileView({ posts, albums }) {
+function UserProfileView({ posts, albums, userActive, otherUsers }) {
   return (
     <div className="userProfileContainer">
       <div className="userHeader">
-        <h4>Welcome userName</h4>
+        <h4>Welcome {userActive?.name}</h4>
         <button className="logout">log out</button>
       </div>
       <div className="userContent">
         <div className="postsContainer">
           <h2 className="contentTitle">Your Posts</h2>
           {posts.length > 0 ? (
-            posts.map((post) => <SinglePost post={post} />)
+            posts.map((post) => <SinglePost post={post} key={post.title} />)
           ) : (
             <p>Empty</p>
           )}
@@ -24,13 +25,20 @@ function UserProfileView({ posts, albums }) {
         <div className="albumsContainer">
           <h2 className="contentTitle">Your Albums</h2>
           {albums.length > 0 ? (
-            albums.map((album) => <SingleAlbum album={album} />)
+            albums.map((album) => <SingleAlbum album={album} key={album.title} />)
           ) : (
             <p>Empty</p>
           )}
         </div>
       </div>
-      <div className="otherUsers">otherUsers</div>
+      <div className="otherUsersContainer">
+        <h2 className="contentTitle">Other Users</h2>
+        <div className="otherUsers">
+          {otherUsers.map((user) => (
+            <SingleUserAvatar user={user} key={user.name} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

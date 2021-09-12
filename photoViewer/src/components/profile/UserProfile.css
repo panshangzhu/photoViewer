@@ -44,9 +44,21 @@
   overflow: hidden;
   margin-bottom: 16px;
 }
+.otherUsersContainer {
+  min-height: 100px;
+  padding: 0px 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  border-top: 5px solid #7f8fa6;
+}
+.otherUsersContainer .contentTitle {
+  margin: 0px;
+}
 .otherUsers {
-  height: 100px;
-  background-color: wheat;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 @media only screen and (max-width: 768px) {
@@ -74,7 +86,7 @@
 
 /* Single post CSS */
 .postContainer {
-  height: 100px;
+  height: 160px;
   margin-bottom: 16px;
   -webkit-box-shadow: 5px 5px 15px 5px rgba(180, 166, 166, 0.31);
   box-shadow: 5px 5px 15px 5px rgba(180, 166, 166, 0.31);
@@ -95,6 +107,10 @@
   color: whitesmoke;
   border-radius: 5px;
   margin-bottom: 16px;
+  cursor: pointer;
+}
+.albumContainer:hover {
+  background-color: #40739e;
 }
 .albumTitle {
   white-space: nowrap;
@@ -102,5 +118,27 @@
   overflow: hidden;
 }
 .contentTitle {
-    margin: 16px;
+  margin: 16px;
+}
+
+/* Single User avatar CSS */
+.userAvatarContainer {
+  width: 60px;
+  height: 60px;
+  background-color: #40739e;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.userAvatarContainer:hover {
+  cursor: pointer;
+  background-color: #7f8fa6;
+}
+
+.avatarName {
+  font-size: 32px;
+  color: white;
 }

@@ -10,6 +10,8 @@ export const getUserName = (state) => fetchAuthData(state, "userName");
 export const getUsers = (state) => fetchAuthData(state, "users");
 export const getAuthUserNames = (state) =>
   getUsers(state).map((user) => user.username);
+export const getUserNamesAndIds = (state) =>
+  getUsers(state).map((user) => ({ id: user.id, name: user.name }));
 export const getUserDetail = (state) =>
   getUsers(state).find((user) => user.username === getUserName(state));
 export const getActiveUserId = (state) => getUserDetail(state)?.id;

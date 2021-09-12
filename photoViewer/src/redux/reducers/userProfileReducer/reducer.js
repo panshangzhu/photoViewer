@@ -1,4 +1,8 @@
-import { SET_USER_ALBUMS, SET_USER_POSTS } from "./actionTypes";
+import {
+  SET_USER_ALBUMS,
+  SET_USER_POSTS,
+  RESET_POSTS_ALBUMS,
+} from "./actionTypes";
 
 const initialState = {
   posts: [],
@@ -18,6 +22,8 @@ export const reducer = (state = initialState, action) => {
         ...state,
         albums: action.payload.albums,
       };
+    case RESET_POSTS_ALBUMS:
+      return initialState;
     default:
       return state;
   }

@@ -1,2 +1,3 @@
 export const SET_USER_POSTS = "GET_USER_POSTS";
 export const SET_USER_ALBUMS = "GET_USER_ALBUMS";
+export const RESET_POSTS_ALBUMS = "RESET_POSTS_ALBUMS";

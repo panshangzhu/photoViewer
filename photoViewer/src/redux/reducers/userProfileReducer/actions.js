@@ -1,8 +1,11 @@
-
 // Internal
 import { getData } from "api/Api";
 import { getActiveUserId } from "redux/reducers/authReducer/Selectors";
-import { SET_USER_POSTS, SET_USER_ALBUMS } from "./actionTypes";
+import {
+  SET_USER_POSTS,
+  SET_USER_ALBUMS,
+  RESET_POSTS_ALBUMS,
+} from "./actionTypes";
 
 const _setPosts = (posts) => ({
   type: SET_USER_POSTS,
@@ -16,6 +19,10 @@ const _setAlbums = (albums) => ({
   payload: {
     albums,
   },
+});
+
+export const resetPostsAlbums = () => ({
+  type: RESET_POSTS_ALBUMS,
 });
 
 //  thunk: get user posts
