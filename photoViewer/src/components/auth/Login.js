@@ -6,22 +6,19 @@ import { bindActionCreators } from "redux";
 import { push } from "connected-react-router";
 
 // Internal
-import {
-  updateUserName,
-  getUsers,
-} from "redux/reducers/authReducer/actions";
-import { getAuthUserNames } from "redux/reducers/authReducer/Selectors";
+import { updateActiveUser, getUsers } from "redux/reducers/authReducer/actions";
+import { getUserNamesAndIds } from "redux/reducers/authReducer/Selectors";
 import "./Login.css";
 
 const stateToProps = (state) => ({
-  userNames: getAuthUserNames(state),
+  authUsers: getUserNamesAndIds(state),
 });
 
 const dispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
     {
       push,
-      updateUserName,
+      updateActiveUser,
       getUsers,
     },
     dispatch
@@ -30,12 +27,12 @@ const dispatchToProps = (dispatch) => ({
 
 class Login extends Component {
   state = {
-    userName: "",
+    username: "",
     errorMessage: "",
   };
 
   // control input value
-  setUserName = (event) => this.setState({ userName: event.target.value });
+  setUsername = (event) => this.setState({ username: event.target.value });
 
   // set Error Message to display
   setErrorMessage = (errorMessage) => this.setState({ errorMessage });
@@ -47,18 +44,22 @@ class Login extends Component {
 
   // process login
   onLogin = () => {
-    const { userName } = this.state;
-    const { userNames } = this.props;
+    const { username } = this.state;
+    const usernames = this.props.authUsers.map((user) => user.username);
 
-    if (userName.length === 0) {
+    if (username.length === 0) {
       this.setErrorMessage("Please enter user name!");
-    } else if (!userNames.includes(userName)) {
+    } else if (!usernames.includes(username)) {
       this.setErrorMessage("User name is not valid!");
     } else {
-      // remember userName in redux for future use
-      this.props.actions.updateUserName(userName);
+      const activeUser =
+        this.props.authUsers.find(
+          (user) => user.username === this.state.username
+        ) || {};
+      // remember active User in redux for future use
+      this.props.actions.updateActiveUser(activeUser);
       // Route to userProfile page
-      this.props.actions.push(`/${userName}`);
+      this.props.actions.push(`/${activeUser.id}`);
     }
   };
 
@@ -71,8 +72,8 @@ class Login extends Component {
           <input
             type="text"
             className="userNameInput"
-            value={this.state.userName}
-            onChange={this.setUserName}
+            value={this.state.username}
+            onChange={this.setUsername}
           />
           {this.state.errorMessage && (
             <div className="errorMessage">{this.state.errorMessage}</div>

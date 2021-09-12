@@ -23,19 +23,13 @@ import {
 import UserPostView from "./UserPostView";
 
 const stateToProps = (state) => ({
-  userAlbums: getUserAlbums(state),
-  userPosts: getUserPosts(state),
-  userActive: getUserDetail(state),
-  otherUsers: getUserNamesAndIds(state),
+  
 });
 
 const dispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
     {
-      fetchUserPosts,
-      fetchUserAlbums,
       push,
-      resetPostsAlbums,
     },
     dispatch
   ),

@@ -8,12 +8,12 @@ import { push, goBack } from "connected-react-router";
 // Internal
 import { getData } from "api/Api";
 import Overlay from "components/common/overlay/Overlay";
-import { getUserDetail } from "redux/reducers/authReducer/Selectors";
+import { getActiveUser } from "redux/reducers/authReducer/Selectors";
 import SingleAlbumPhoto from "./SingleAlbumPhoto";
 import "./UserAlbum.css";
 
 const stateToProps = (state) => ({
-  userActive: getUserDetail(state),
+  userActive: getActiveUser(state),
 });
 
 const dispatchToProps = (dispatch) => ({

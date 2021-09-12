@@ -6,12 +6,7 @@ const fetchAuthData = createCachedSelector(
   (state, key) => key,
   (data, key) => data[key]
 )((state, key) => key);
-export const getUserName = (state) => fetchAuthData(state, "userName");
+export const getActiveUser = (state) => fetchAuthData(state, "activeUser");
 export const getUsers = (state) => fetchAuthData(state, "users");
-export const getAuthUserNames = (state) =>
-  getUsers(state).map((user) => user.username);
 export const getUserNamesAndIds = (state) =>
-  getUsers(state).map((user) => ({ id: user.id, name: user.name }));
-export const getUserDetail = (state) =>
-  getUsers(state).find((user) => user.username === getUserName(state));
-export const getActiveUserId = (state) => getUserDetail(state)?.id;
+  getUsers(state).map((user) => ({ id: user.id, name: user.name, username: user.username }));

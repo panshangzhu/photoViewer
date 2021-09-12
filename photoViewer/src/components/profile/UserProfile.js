@@ -18,7 +18,7 @@ import {
   getUserPosts,
 } from "redux/reducers/userProfileReducer/Selectors";
 import {
-  getUserDetail,
+  getActiveUser,
   getUserNamesAndIds,
 } from "redux/reducers/authReducer/Selectors";
 import UserProfileView from "./UserProfileView";
@@ -26,7 +26,7 @@ import UserProfileView from "./UserProfileView";
 const stateToProps = (state) => ({
   userAlbums: getUserAlbums(state),
   userPosts: getUserPosts(state),
-  userActive: getUserDetail(state),
+  userActive: getActiveUser(state),
   otherUsers: getUserNamesAndIds(state),
 });
 
@@ -71,7 +71,7 @@ class UserProfile extends Component {
   }
 
   onAlbumClick = (albumId) => {
-    this.props.actions.push(`/${this.props.userActive.username}/${albumId}`);
+    this.props.actions.push(`/${this.props.userActive.id}/${albumId}`);
   };
 
   onLogout = (e) => {

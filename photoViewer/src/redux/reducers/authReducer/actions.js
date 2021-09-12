@@ -1,11 +1,11 @@
 // Internal
 import { getData } from "api/Api";
-import { SET_USERNAME, SET_USERS, RESET_AUTH } from "./actionTypes";
+import { SET_ACTIVE_USER, SET_USERS, RESET_AUTH } from "./actionTypes";
 
-export const updateUserName = (userName) => ({
-  type: SET_USERNAME,
+export const updateActiveUser = (activeUser) => ({
+  type: SET_ACTIVE_USER,
   payload: {
-    userName,
+    activeUser,
   },
 });
 

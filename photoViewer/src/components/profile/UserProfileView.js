@@ -17,12 +17,12 @@ function UserProfileView({
   return (
     <div className="userProfileContainer">
       <div className="userHeader">
-        <h4><span className="welcome">Welcome</span> {userActive?.name}</h4>
+        <h4><span className="welcome">User</span> : {userActive?.name}</h4>
         <button className="logout" onClick={(e) => onLogout(e)}>log out</button>
       </div>
       <div className="userContent">
         <div className="postsContainer">
-          <h2 className="contentTitle">Your Posts</h2>
+          <h2 className="contentTitle">Posts</h2>
           {posts.length > 0 ? (
             posts.map((post) => <SinglePost post={post} key={post.title} />)
           ) : (
@@ -30,7 +30,7 @@ function UserProfileView({
           )}
         </div>
         <div className="albumsContainer">
-          <h2 className="contentTitle">Your Albums</h2>
+          <h2 className="contentTitle">Albums</h2>
           {albums.length > 0 ? (
             albums.map((album) => (
               <SingleAlbum album={album} key={album.title} onAlbumClick={onAlbumClick} />

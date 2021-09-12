@@ -1,18 +1,18 @@
-import { SET_USERNAME, SET_USERS, RESET_AUTH } from "./actionTypes";
+import { SET_ACTIVE_USER, SET_USERS, RESET_AUTH } from "./actionTypes";
 
 const initialState = {
-  // active user userName
-  userName: "",
+  // active user
+  activeUser: {},
   users: [],
 };
 
 export const reducer = (state = initialState, action) => {
   const actionType = action.type;
   switch (actionType) {
-    case SET_USERNAME:
+    case SET_ACTIVE_USER:
       return {
         ...state,
-        userName: action.payload.userName,
+        activeUser: action.payload.activeUser,
       };
     case SET_USERS:
       return {

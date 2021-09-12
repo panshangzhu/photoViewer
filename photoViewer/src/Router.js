@@ -11,10 +11,10 @@ export default class Router extends Component {
       <Suspense fallback={<div />}>
         <Switch>
           <Route exact path="/" render={() => <Login />} />
-          <Route exact path="/:userName" render={() => <UserProfile />} />
+          <Route exact path="/:userId([0-9]+)" render={() => <UserProfile />} />
           <Route
             exact
-            path="/:userName/:albumId([0-9]+)"
+            path="/:userName([0-9]+)/:albumId([0-9]+)"
             render={({ match }) => <UserAlbum albumId={match.params.albumId} />}
           />
         </Switch>
