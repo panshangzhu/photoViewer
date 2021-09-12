@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // Internal
 import "./UserProfile.css";
 
-function SinglePost({ post }) {
+function SinglePost({ post, onPostClick }) {
   const [displayText, setDisplayText] = useState("");
   const [displayTitle, setDisplayTitle] = useState("");
 
@@ -32,7 +32,7 @@ function SinglePost({ post }) {
   }, [post.body, post.title]);
 
   return (
-    <div className="postContainer">
+    <div className="postContainer" onClick={() => onPostClick(post.id)}>
       <h3>{displayTitle}</h3>
       <div className="postBody">
         <p>{displayText}</p>

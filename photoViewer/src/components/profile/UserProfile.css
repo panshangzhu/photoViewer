@@ -26,6 +26,9 @@
 .logout:hover {
   background-color: #c23616;
 }
+.welcome {
+  color: #c23616;
+}
 
 .userContent {
   display: flex;
@@ -91,6 +94,11 @@
   -webkit-box-shadow: 5px 5px 15px 5px rgba(180, 166, 166, 0.31);
   box-shadow: 5px 5px 15px 5px rgba(180, 166, 166, 0.31);
   padding: 8px;
+  cursor: pointer;
+}
+.postContainer:hover {
+  background-color: #718093;
+  color: #f5f6fa;
 }
 .postBody {
   width: 100%;

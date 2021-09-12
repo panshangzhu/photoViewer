@@ -71,8 +71,12 @@ class UserProfile extends Component {
   }
 
   onAlbumClick = (albumId) => {
-    this.props.actions.push(`/${this.props.userActive.id}/${albumId}`);
+    this.props.actions.push(`/album${albumId}`);
   };
+
+  onPostClick = (postId) => {
+    this.props.actions.push(`/post${postId}`);
+  }
 
   onLogout = (e) => {
     const { actions } = this.props;
@@ -92,6 +96,7 @@ class UserProfile extends Component {
         userActive={userActive}
         otherUsers={otherUsers}
         onAlbumClick={this.onAlbumClick}
+        onPostClick={this.onPostClick}
         onLogout={this.onLogout}
         key="userProfileView"
       />,

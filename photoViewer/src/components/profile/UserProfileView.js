@@ -12,6 +12,7 @@ function UserProfileView({
   userActive,
   otherUsers,
   onAlbumClick,
+  onPostClick,
   onLogout,
 }) {
   return (
@@ -24,7 +25,7 @@ function UserProfileView({
         <div className="postsContainer">
           <h2 className="contentTitle">Posts</h2>
           {posts.length > 0 ? (
-            posts.map((post) => <SinglePost post={post} key={post.title} />)
+            posts.map((post) => <SinglePost post={post} key={post.title} onPostClick={onPostClick} />)
           ) : (
             <p>Empty</p>
           )}
