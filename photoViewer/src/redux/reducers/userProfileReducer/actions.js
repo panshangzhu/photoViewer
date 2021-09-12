@@ -1,6 +1,5 @@
 // Internal
 import { getData } from "api/Api";
-import { getActiveUser } from "redux/reducers/authReducer/Selectors";
 import {
   SET_USER_POSTS,
   SET_USER_ALBUMS,
@@ -26,9 +25,7 @@ export const resetPostsAlbums = () => ({
 });
 
 //  thunk: get user posts
-export const fetchUserPosts = () => (dispatch, getState) => {
-  const state = getState();
-  const userId = getActiveUser(state).id;
+export const fetchUserPosts = (userId) => (dispatch) => {
   return getData("/posts", {
     userId,
   })
@@ -40,9 +37,7 @@ export const fetchUserPosts = () => (dispatch, getState) => {
 };
 
 //  thunk: get user albums
-export const fetchUserAlbums = () => (dispatch, getState) => {
-  const state = getState();
-  const userId = getActiveUser(state).id;
+export const fetchUserAlbums = (userId) => (dispatch) => {
   return getData("/albums", {
     userId,
   })

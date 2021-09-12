@@ -72,3 +72,12 @@ button:hover {
 .backButton:hover {
   color: #e84118;
 }
+.postUserHeader {
+  height: 66px;
+  background-color: #7f8fa6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 16px;
+  color: #dcdde1;
+}

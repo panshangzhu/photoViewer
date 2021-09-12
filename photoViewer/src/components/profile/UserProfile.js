@@ -27,7 +27,7 @@ const stateToProps = (state) => ({
   userAlbums: getUserAlbums(state),
   userPosts: getUserPosts(state),
   userActive: getActiveUser(state),
-  otherUsers: getUserNamesAndIds(state),
+  allUsers: getUserNamesAndIds(state),
 });
 
 const dispatchToProps = (dispatch) => ({
@@ -48,21 +48,44 @@ class UserProfile extends Component {
     openOverLay: false,
   };
 
-  closeOverLay = () => this.setState({ openOverLay: false });
+  updateOverLay = (open) => this.setState({ openOverLay: open });
 
   componentDidMount() {
-    const { actions } = this.props;
+    const { actions, userId } = this.props;
 
     // if user hasn't logged in, return to login page
     // in the future, we can use browser storage to keep user logged in
     if (!this.props.userActive?.id) {
       actions.push("/");
     } else {
-      Promise.all([actions.fetchUserPosts(), actions.fetchUserAlbums()]).then(
-        () => {
-          this.closeOverLay();
-        }
-      );
+      Promise.all([
+        actions.fetchUserPosts(userId),
+        actions.fetchUserAlbums(userId),
+      ])
+        .then(() => {
+          this.updateOverLay(false);
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { userId, actions } = this.props;
+    if (prevProps.userId !== userId) {
+      this.updateOverLay(true);
+      Promise.all([
+        actions.fetchUserPosts(userId),
+        actions.fetchUserAlbums(userId),
+      ])
+        .then(() => {
+          this.updateOverLay(false);
+          window.scrollTo(0, 0);
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
     }
   }
 
@@ -76,7 +99,11 @@ class UserProfile extends Component {
 
   onPostClick = (postId) => {
     this.props.actions.push(`/post${postId}`);
-  }
+  };
+
+  onUserClick = (userId) => {
+    this.props.actions.push(`/${userId}`);
+  };
 
   onLogout = (e) => {
     const { actions } = this.props;
@@ -87,16 +114,18 @@ class UserProfile extends Component {
   };
 
   render() {
-    const { userPosts, userAlbums, userActive, otherUsers } = this.props;
+    const { userPosts, userAlbums, userActive, allUsers, userId } = this.props;
     return [
       <Overlay open={this.state.openOverLay} key="overlay" />,
       <UserProfileView
         posts={userPosts}
         albums={userAlbums}
         userActive={userActive}
-        otherUsers={otherUsers}
+        allUsers={allUsers}
+        userId={userId}
         onAlbumClick={this.onAlbumClick}
         onPostClick={this.onPostClick}
+        onUserClick={this.onUserClick}
         onLogout={this.onLogout}
         key="userProfileView"
       />,

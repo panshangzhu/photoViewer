@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 // Internal
 import "./UserProfile.css";
 
-function SingleUserAvatar({ user }) {
+function SingleUserAvatar({ user, onUserClick }) {
   // get name initials
   const getNameInitals = useMemo(() => {
     // display name initals
@@ -15,8 +15,8 @@ function SingleUserAvatar({ user }) {
   if (!user) return null;
 
   return (
-    <div className="userAvatarContainer">
-        <p className="avatarName">{getNameInitals}</p>
+    <div className="userAvatarContainer" onClick={() => onUserClick(user.id)}>
+      <p className="avatarName">{getNameInitals}</p>
     </div>
   );
 }

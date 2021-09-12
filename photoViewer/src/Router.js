@@ -12,7 +12,7 @@ export default class Router extends Component {
       <Suspense fallback={<div />}>
         <Switch>
           <Route exact path="/" render={() => <Login />} />
-          <Route exact path="/:userId([0-9]+)" render={() => <UserProfile />} />
+          <Route exact path="/:userId([0-9]+)" render={({ match }) => <UserProfile userId={match.params.userId} />} />
           <Route
             exact
             path="/album:albumId([0-9]+)"
