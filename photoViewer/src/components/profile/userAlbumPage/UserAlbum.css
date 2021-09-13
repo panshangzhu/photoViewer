@@ -43,3 +43,8 @@
 .albumPhoto:hover {
   background-color: #dcdde1;
 }
+
+.albumName {
+  text-align: center;
+  color: #c23616;
+}

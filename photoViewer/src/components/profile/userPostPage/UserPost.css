@@ -22,6 +22,7 @@
   flex-direction: column;
   gap: 8px;
   color: #dcdde1;
+  border-radius: 10px;
 }
 .titleStrong {
   color: #2f3640;
@@ -38,20 +39,20 @@
   align-items: center;
 }
 
-input,
-textarea {
+.userPostContainer input,
+.userPostContainer textarea {
   border: none;
   outline: none;
   border-radius: 5px;
 }
-form {
+.userPostContainer form {
   width: 100%;
   max-width: 300px;
 }
-textarea {
+.userPostContainer textarea {
   width: 100%;
 }
-button {
+.userPostContainer button {
   border: none;
   outline: none;
   padding: 8px;
@@ -61,7 +62,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
-button:hover {
+.userPostContainer button:hover {
   background-color: #273c75;
 }
 
@@ -73,11 +74,19 @@ button:hover {
   color: #e84118;
 }
 .postUserHeader {
-  height: 66px;
+  min-height: 66px;
   background-color: #7f8fa6;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0px 16px;
   color: #dcdde1;
+  flex-wrap: wrap;
+}
+.postUserInfo {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

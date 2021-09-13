@@ -1,5 +1,9 @@
+// External
+import { push } from "connected-react-router";
+
 // Internal
 import { getData } from "api/Api";
+import { resetPostsAlbums } from "redux/reducers/userProfileReducer/actions";
 import { SET_ACTIVE_USER, SET_USERS, RESET_AUTH } from "./actionTypes";
 
 export const updateActiveUser = (activeUser) => ({
@@ -29,4 +33,11 @@ export const getUsers = () => (dispatch, getState) => {
     .catch((err) => {
       window.alert(err);
     });
+};
+
+// Thunk, process user logout
+export const logout = () => (dispatch) => {
+  dispatch(resetPostsAlbums());
+  dispatch(resetAuth());
+  dispatch(push("/"));
 };

@@ -12,7 +12,7 @@ import {
   fetchUserPosts,
   resetPostsAlbums,
 } from "redux/reducers/userProfileReducer/actions";
-import { resetAuth } from "redux/reducers/authReducer/actions";
+import { logout } from "redux/reducers/authReducer/actions";
 import {
   getUserAlbums,
   getUserPosts,
@@ -37,7 +37,7 @@ const dispatchToProps = (dispatch) => ({
       fetchUserAlbums,
       push,
       resetPostsAlbums,
-      resetAuth,
+      logout,
     },
     dispatch
   ),
@@ -108,9 +108,7 @@ class UserProfile extends Component {
   onLogout = (e) => {
     const { actions } = this.props;
     e.preventDefault();
-    actions.resetPostsAlbums();
-    actions.resetAuth();
-    actions.push("/");
+    actions.logout();
   };
 
   render() {

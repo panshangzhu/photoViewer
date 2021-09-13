@@ -7,13 +7,18 @@ import { push, goBack } from "connected-react-router";
 
 // Internal
 import { getData, postData } from "api/Api";
+import { logout } from "redux/reducers/authReducer/actions";
 import Overlay from "components/common/overlay/Overlay";
-import { getActiveUser } from "redux/reducers/authReducer/Selectors";
+import {
+  getActiveUser,
+  getUserNamesAndIds,
+} from "redux/reducers/authReducer/Selectors";
 
 import "./UserPost.css";
 
 const stateToProps = (state) => ({
   userActive: getActiveUser(state),
+  users: getUserNamesAndIds(state),
 });
 
 const dispatchToProps = (dispatch) => ({
@@ -21,6 +26,7 @@ const dispatchToProps = (dispatch) => ({
     {
       push,
       goBack,
+      logout,
     },
     dispatch
   ),
@@ -34,12 +40,14 @@ class UserPost extends Component {
     newCommentTitle: "",
     newCommentBody: "",
     newCommentFrom: "",
+    postOwner: {},
   };
 
   closeOverLay = () => this.setState({ openOverLay: false });
 
   setComments = (comments) => this.setState({ comments });
   setPost = (post) => this.setState({ post });
+  setPostOwner = (postOwner) => this.setState({ postOwner });
 
   setNewCommentTitle = (e) =>
     this.setState({ newCommentTitle: e.target.value });
@@ -66,12 +74,30 @@ class UserPost extends Component {
           // store post data and comments data
           this.setPost(response[0][0]);
           this.setComments(response[1]);
+
+          // get postOwner
+          this.getPostOwner(response[0][0].userId);
+
           // close overlay
           this.closeOverLay();
         })
         .catch((err) => window.alert(err));
     }
   }
+
+  getPostOwner = (userId) => {
+    // when a user logs in, we store users in redux, so no need to call api to get postOwner info
+    if (this.props.users.length > 0) {
+      this.setPostOwner(this.props.users.find((user) => user.id === userId));
+    } else {
+      // if no user logged in, call api to get postOwner info
+      getData("/users", {
+        id: userId,
+      })
+        .then((postOwner) => this.setPostOwner(postOwner[0]))
+        .catch((err) => window.alert(err));
+    }
+  };
 
   backClick = () => {
     if (this.props.userActive?.id) {
@@ -112,6 +138,7 @@ class UserPost extends Component {
   };
 
   render() {
+    console.log("this.state", this.state);
     if (this.state.openOverLay) return <Overlay open key="overlay" />;
     if (this.state.post) {
       const { post, comments } = this.state;
@@ -125,11 +152,25 @@ class UserPost extends Component {
                 ? "Back to login"
                 : "Back to list"}
             </h3>
-            <h6>
-              {this.props.userActive?.name
-                ? `You have logged as ${this.props.userActive.name}`
-                : "You haven't Loggedin"}
-            </h6>
+            <h3>
+              <span className="titleStrong">Post of : </span>{" "}
+              {this.state.postOwner?.name}
+            </h3>
+            <div className="postUserInfo">
+              <h5>
+                {this.props.userActive?.name
+                  ? `You have logged in as ${this.props.userActive.name}`
+                  : "You haven't Loggedin"}
+              </h5>
+              {this.props.userActive?.name && (
+                <button
+                  className="logout"
+                  onClick={() => this.props.actions.logout()}
+                >
+                  log out
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="userPostContainer">
@@ -142,22 +183,22 @@ class UserPost extends Component {
               {comments.map((comment) => (
                 <div className="commentContainer" key={comment.id}>
                   <div>
-                    <h6>
+                    <h5>
                       <span className="titleStrong">Title</span> :{" "}
                       {comment.name}
-                    </h6>
+                    </h5>
                   </div>
                   <div>
-                    <h6>
+                    <h5>
                       <span className="titleStrong">Comment</span> :{" "}
                       {comment.body}
-                    </h6>
+                    </h5>
                   </div>
                   <div className="from">
-                    <h6>
+                    <h5>
                       <span className="titleStrong">From</span> :{" "}
                       {comment.email}
-                    </h6>
+                    </h5>
                   </div>
                 </div>
               ))}

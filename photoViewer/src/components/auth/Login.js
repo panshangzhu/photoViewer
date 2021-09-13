@@ -80,7 +80,9 @@ class Login extends Component {
           )}
         </div>
 
-        <button onClick={(e) => this.onLogin(e)}>Log in</button>
+        <button onClick={(e) => this.onLogin(e)} className="loginButton">
+          Log in
+        </button>
       </div>
     );
   }
