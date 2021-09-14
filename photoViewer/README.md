@@ -37,11 +37,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
  
 2 User will re-direct to main(posts/albums/otherUsers) page after logged in, if go to url: http://localhost:3000/1 directly, the page will re-direct to login page
   1) by click post box, the page will re-redirect to post and comment page
-  2) by click album box, the page will re-direct to album potos page
+  2) by click album box, the page will re-direct to album photos page
   3) by click other users box in the end of the page, the page will re-firect to other users' profile 
 
 3 The Single Post page "http://localhost:3000/post2" can be accessed without login, users can read comments and posts comments to other users'posts
-  1) if user has logged in, the comment "From" field will pre-fill user's email, otherwise, the user has to type by himself
+  1) if user has logged in, the comment "From" field will be pre-filled by user's email, otherwise, the user has to type by himself
   2) if user has logged in, user cannot post comment to his own post
 
 4 Album page "http://localhost:3000/album4" cannot be accessed without login, if go to url: "http://localhost:3000/album4" directly, the page will re-direct to login page
