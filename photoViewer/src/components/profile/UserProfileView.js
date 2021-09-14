@@ -25,13 +25,13 @@ function UserProfileView({
 
   return (
     <div className="userProfileContainer">
-       {/* MetaTags for SEO */}
-       <MetaTags>
-              <title>FlightHub User Profile</title>
-              <meta name="description" content="FlightHub Photo Viewer Profile" />
-              <meta property="og:title" content="FlightHub Profile" />
-              <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
-            </MetaTags>
+      {/* MetaTags for SEO */}
+      <MetaTags>
+        <title>FlightHub User Profile</title>
+        <meta name="description" content="FlightHub Photo Viewer Profile" />
+        <meta property="og:title" content="FlightHub Profile" />
+        <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
+      </MetaTags>
       <div className="userHeader">
         <h4>
           <span className="welcome">Page</span> : {getUserName}

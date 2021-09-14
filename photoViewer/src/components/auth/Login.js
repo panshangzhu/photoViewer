@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 // External
+import { MetaTags } from "react-meta-tags";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { push } from "connected-react-router";
@@ -66,6 +67,13 @@ class Login extends Component {
   render() {
     return (
       <div className="loginContainer">
+        {/* MetaTags for SEO */}
+        <MetaTags>
+          <title>FlightHub User Login</title>
+          <meta name="description" content="FlightHub Photo Viewer login" />
+          <meta property="og:title" content="FlightHub login" />
+          <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
+        </MetaTags>
         <div className="title">Photo Viewer</div>
         <div className="inputContainer">
           <h6 id="userNameLabel">User Name</h6>
