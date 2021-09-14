@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 // External
+import MetaTags from "react-meta-tags";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { push, goBack } from "connected-react-router";
@@ -132,19 +133,35 @@ class UserPost extends Component {
         email: this.state.newCommentFrom,
       }).then(() => {
         // tell user the comment has updated
-        window.alert("Your Comment Has Posted");
+        window.alert(
+          `Your Comment Has Posted,
+           title: ${this.state.newCommentTitle},
+           comment: ${this.state.newCommentBody}`
+        );
+        //  reset state
+        this.setState({
+          newCommentTitle: "",
+          newCommentBody: "",
+          newCommentFrom: "",
+        });
       });
     }
   };
 
   render() {
-    console.log("this.state", this.state);
     if (this.state.openOverLay) return <Overlay open key="overlay" />;
     if (this.state.post) {
       const { post, comments } = this.state;
       return (
         <>
           <div className="postUserHeader">
+            {/* MetaTags for SEO */}
+            <MetaTags>
+              <title>FlightHub User Posts</title>
+              <meta name="description" content="FlightHub Photo Viewer Posts" />
+              <meta property="og:title" content="FlightHub Posts" />
+              <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
+            </MetaTags>
             <h3 onClick={this.backClick} className="backButton">
               {/* if user has logged in, we display Back To List */}
               {!this.props.userActive ||
