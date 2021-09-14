@@ -36,9 +36,9 @@ function SinglePost({ post, onPostClick }) {
     <div className="postContainer" onClick={() => onPostClick(post.id)}>
       {/* MetaTags for SEO */}
       <MetaTags>
-        <title>FlightHub User Single Post</title>
+        <title>FlightHub Posts</title>
         <meta name="description" content="FlightHub Photo Viewer Single Post" />
-        <meta property="og:title" content="FlightHub Single Post" />
+        <meta property="og:title" content="FlightHub Posts" />
         <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
       </MetaTags>
       <h3>{displayTitle}</h3>

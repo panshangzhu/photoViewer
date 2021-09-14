@@ -157,9 +157,9 @@ class UserPost extends Component {
           <div className="postUserHeader">
             {/* MetaTags for SEO */}
             <MetaTags>
-              <title>FlightHub User Posts</title>
-              <meta name="description" content="FlightHub Photo Viewer Posts" />
-              <meta property="og:title" content="FlightHub Posts" />
+              <title>FlightHub Post</title>
+              <meta name="description" content="FlightHub Photo Viewer Post" />
+              <meta property="og:title" content="FlightHub Post" />
               <meta property="og:image" content="%PUBLIC_URL%/logo192.png" />
             </MetaTags>
             <h3 onClick={this.backClick} className="backButton">
