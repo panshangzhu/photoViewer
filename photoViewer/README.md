@@ -49,4 +49,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 5 User can logout
 
 6 add mataTags in pages For SEO
+
+7 Responsive Page in mobile and desktop view
     
