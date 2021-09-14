@@ -4,9 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # How to Run This Project: 
 
-`cd photoViewer`
-`yarn` or `npm install`
-`yarn start` or `npm start`
+1) `cd photoViewer`
+2) `yarn` or `npm install`
+3) `yarn start` or `npm start`
 
 # Dependecies used in this photoViwer Project
     "axios": "^0.21.4":                   // async fetch api value
