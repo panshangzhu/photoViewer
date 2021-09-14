@@ -23,7 +23,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
                  
 # Features
 1 User can login by username (case sensitive)
-  avaiable usernames: Bret,  Antonette, Samantha, Karianne, Kamren, Leopoldo_Corkery, Elwyn.Skiles, Maxime_Nienow, Delphine, Moriah.Stanton
+  avaiable usernames:
+  Bret,
+  Antonette,
+  Samantha,
+  Karianne,
+  Kamren,
+  Leopoldo_Corkery,
+  Elwyn.Skiles,
+  Maxime_Nienow,
+  Delphine,
+  Moriah.Stanton
  
 2 User will re-direct to main(posts/albums/otherUsers) page after logged in, if go to url: http://localhost:3000/1 directly, the page will re-direct to login page
   1) by click post box, the page will re-redirect to post and comment page
