@@ -47,4 +47,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 4 Album page "http://localhost:3000/album4" cannot be accessed without login, if go to url: "http://localhost:3000/album4" directly, the page will re-direct to login page
 
 5 User can logout
+
+6 add mataTags in pages For SEO
     
